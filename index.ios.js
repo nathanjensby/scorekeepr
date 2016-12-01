@@ -9,45 +9,75 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Navigator
 } from 'react-native';
+
+import Home from './components/Home';
+import GenericContainer from './components/GenericContainer'
+import PingPongContainer from './components/PingPongContainer'
+import SpadesContainer from './components/SpadesContainer'
 
 export default class scorekeepr extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
+      <Navigator
+        initialRoute={{ title: 'Home',
+                        index: 0 ,
+                        id: 'Home'
+                      }}
+        renderScene={
+          this.navigatorRenderScene
+        }
+      />
+    )
+  }
+
+  navigatorRenderScene(route,navigator){
+    _navigator = navigator;
+    switch(route.id){
+      case 'Home':
+        return(<Home navigator={navigator} title='Home' />)
+      case 'GenericContainer':
+        return(<GenericContainer navigator={navigator} title='GenericContainer'
+         />)
+         case 'PingPongContainer':
+           return(<PingPongContainer navigator={navigator} title='PingPongContainer'
+            />)
+            case 'SpadesContainer':
+              return(<SpadesContainer navigator={navigator} title='SpadesContainer'
+               />)
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+
+
 
 AppRegistry.registerComponent('scorekeepr', () => scorekeepr);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+console.disableYellowBox = true;
